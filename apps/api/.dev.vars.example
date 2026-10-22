@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+DEV_AUTH=1
+FILE_URL_SECRET=local-dev-secret
+# Leave unset to run the pipeline on the offline stand-in model.
+# ANTHROPIC_API_KEY=sk-ant-...
+# MODEL_MODE=anthropic

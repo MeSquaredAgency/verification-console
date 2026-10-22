@@ -1,0 +1,10 @@
+From: Jon Smyth <jon.smyth@example.net>
+To: Command Centre <cc@apn-demo.example>
+Subject: Parking space
+Date: Thu 22 Oct 2026 09:20
+
+Hi,
+
+I'm the tenant at 3/41 Harbour View Parade. Is the parking space number 12 included in my lease?
+
+Jon

@@ -1,0 +1,21 @@
+{
+  "name": "verification-console",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @vc/api --filter @vc/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @vc/web test:e2e",
+    "fixtures:build": "tsx scripts/build-fixtures.ts",
+    "fixtures:report": "pnpm --filter @vc/api fixtures:report"
+  },
+  "devDependencies": {
+    "@vc/shared": "workspace:*",
+    "pdf-lib": "1.17.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

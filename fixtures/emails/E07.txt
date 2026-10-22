@@ -1,0 +1,10 @@
+From: Liam Walsh <liam.walsh@example.com>
+To: Command Centre <cc@apn-demo.example>
+Subject: Oven still broken
+Date: Thu 22 Oct 2026 08:05
+
+Hi,
+
+The oven at 15 Wattle Street has been broken for three weeks now. Last time I was told it would be fixed by Fri 9 Oct 2026. Can you please tell me what is happening?
+
+Liam

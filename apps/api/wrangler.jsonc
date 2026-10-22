@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "verification-console-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vc-db",
+      // Replace with the id from `wrangler d1 create vc-db --location oc` before deploying.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "vc-sources" }],
+  "queues": {
+    "producers": [{ "binding": "PIPELINE", "queue": "vc-pipeline" }],
+    "consumers": [{ "queue": "vc-pipeline", "max_batch_size": 5, "max_batch_timeout": 1, "max_retries": 3, "dead_letter_queue": "vc-pipeline-dlq" }]
+  },
+  "triggers": { "crons": ["17 3 * * *"] },
+  "vars": {
+    "ALLOWED_EMAIL_DOMAIN": "mesquaredagency.com"
+    // ACCESS_TEAM_DOMAIN and ACCESS_AUD are set per environment.
+    // Secrets (wrangler secret put): ANTHROPIC_API_KEY, FILE_URL_SECRET
+  }
+}

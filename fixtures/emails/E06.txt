@@ -1,0 +1,11 @@
+From: Priya Raman <priya.raman@example.com>
+To: Command Centre <cc@apn-demo.example>
+Subject: Rent arrears notice?
+Date: Wed 21 Oct 2026 19:12
+
+Hi,
+
+I got a message saying I'm behind on rent. My rent is $520 a week and I've paid every Monday, so I don't think that's right. Can you check my ledger?
+
+Thanks,
+Priya
