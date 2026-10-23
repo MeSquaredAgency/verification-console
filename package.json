@@ -10,7 +10,10 @@
     "test": "pnpm -r test",
     "test:e2e": "pnpm --filter @vc/web test:e2e",
     "fixtures:build": "tsx scripts/build-fixtures.ts",
-    "fixtures:report": "pnpm --filter @vc/api fixtures:report"
+    "fixtures:report": "pnpm --filter @vc/api fixtures:report",
+    "build:web": "pnpm --filter @vc/web build",
+    "deploy:cf": "cd apps/api && npx wrangler d1 migrations apply vc-db --remote && npx wrangler deploy",
+    "fixtures:seed-sql": "tsx scripts/gen-seed-sql.ts"
   },
   "devDependencies": {
     "@vc/shared": "workspace:*",

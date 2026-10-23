@@ -88,6 +88,7 @@ export async function verifyFileSig(env: Env, key: string, exp: string, sig: str
 }
 
 async function hmac(env: Env, msg: string): Promise<string> {
+  if (!env.FILE_URL_SECRET && env.DEV_AUTH !== "1") throw new HTTPException(500, { message: "FILE_URL_SECRET is not set" });
   const secret = env.FILE_URL_SECRET ?? "dev-only-file-url-secret";
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(msg));

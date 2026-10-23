@@ -1,15 +1,25 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "verification-console-api",
+  // One Worker serves the web app (static assets) and the API (/api/*) on one hostname,
+  // so Cloudflare Access can protect both with one application.
+  "name": "verification-console",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
+  "account_id": "813537406785f2957804689d03560623",
+  // Not reachable from the internet until the Access application exists (see docs/DEPLOY.md).
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "../web/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "vc-db",
-      // Replace with the id from `wrangler d1 create vc-db --location oc` before deploying.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "e92f59d5-96d8-4ada-bb5b-90b6483a1f8c",
       "migrations_dir": "migrations"
     }
   ],
@@ -20,8 +30,9 @@
   },
   "triggers": { "crons": ["17 3 * * *"] },
   "vars": {
-    "ALLOWED_EMAIL_DOMAIN": "mesquaredagency.com"
-    // ACCESS_TEAM_DOMAIN and ACCESS_AUD are set per environment.
-    // Secrets (wrangler secret put): ANTHROPIC_API_KEY, FILE_URL_SECRET
+    "ALLOWED_EMAIL_DOMAIN": "mesquaredagency.com",
+    "ACCESS_TEAM_DOMAIN": "mesquaredagency.cloudflareaccess.com"
+    // ACCESS_AUD is added once the Access application exists.
+    // Secrets (set on the Worker, not here): FILE_URL_SECRET, later ANTHROPIC_API_KEY.
   }
 }

@@ -1,6 +1,6 @@
 # Phase 0 handoff note
 
-**State:** Phase 0 runs locally under Wrangler with fixture data only. Nothing is sent anywhere, and nothing is deployed. Test status: 40 API, 8 shared, 2 web unit and 3 Playwright tests pass. The fixture report flags **22 of 22** planted errors, with all 20 tiers as expected. That report ran on the **offline stand-in model**, so it shows that the coded checks, tiering and plumbing work, not how well the models do. **Live models have not been run.** This session had no API key. Run `MODEL_MODE=anthropic pnpm fixtures:report` before anything else.
+**State:** Phase 0 runs locally under Wrangler with fixture data only. Nothing is sent anywhere. Cloudflare deployment is part done; see `docs/DEPLOY.md`. Test status: 41 API, 8 shared, 2 web unit and 3 Playwright tests pass. The fixture report flags **22 of 22** planted errors, with all 20 tiers as expected. That report ran on the **offline stand-in model**, so it shows that the coded checks, tiering and plumbing work, not how well the models do. **Live models have not been run.** This session had no API key. Run `MODEL_MODE=anthropic pnpm fixtures:report` before anything else.
 
 ## Decisions made where the brief was silent (simpler option chosen)
 

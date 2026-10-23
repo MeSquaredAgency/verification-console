@@ -455,6 +455,14 @@ describe("Access, locks and roles", () => {
     expect((await api(env, "GET", "/api/me", OP)).status).toBe(200);
   });
 
+  it("in production config the dev sign-in header is ignored and file links need a real secret", async () => {
+    const env = await makeEnv({ DEV_AUTH: undefined, FILE_URL_SECRET: undefined, ACCESS_TEAM_DOMAIN: "mesquaredagency.cloudflareaccess.com", ACCESS_AUD: "aud" });
+    expect((await api(env, "GET", "/api/me", OP)).status).toBe(401);
+    expect((await api(env, "POST", "/api/dev/seed", null)).status).toBe(404);
+    const { signFileUrl } = await import("../src/lib/auth");
+    await expect(signFileUrl(env, "k")).rejects.toThrow(/FILE_URL_SECRET/);
+  });
+
   it("legal notices need a licensed APN reviewer for second review", async () => {
     const env = await makeEnv();
     const id = await ingest(env, "E10");

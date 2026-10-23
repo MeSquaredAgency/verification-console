@@ -79,12 +79,6 @@ fixtures/       10 PDF bills, 10 emails, answer keys, playbook and reference dat
 scripts/        fixture generator
 ```
 
-## Deploying to Cloudflare (not done yet)
+## Deploying to Cloudflare
 
-Nothing has been created in a Cloudflare account. To deploy:
-
-1. `wrangler d1 create vc-db --location oc`, then put the id in `apps/api/wrangler.jsonc`. Run `wrangler d1 migrations apply vc-db --remote`.
-2. `wrangler r2 bucket create vc-sources`, `wrangler queues create vc-pipeline`, `wrangler queues create vc-pipeline-dlq`.
-3. Secrets: `wrangler secret put ANTHROPIC_API_KEY`, `wrangler secret put FILE_URL_SECRET`. Set vars `ACCESS_TEAM_DOMAIN` and `ACCESS_AUD`. **Never set `DEV_AUTH` in production.**
-4. Serve the web build (`pnpm --filter @vc/web build`, Pages) and the Worker on one hostname, with the Worker routed at `/api/*`. Put the hostname behind a Cloudflare Access application restricted to mesquaredagency.com Google accounts. Add device posture checks if the plan supports them.
-5. Insert users and client assignments with `POST /api/admin/users` as an admin. Seed the first admin row directly in D1.
+See [`docs/DEPLOY.md`](docs/DEPLOY.md) for the current state and the remaining steps. The database and queues exist in the Me² account. The Worker deploys from GitHub with Workers Builds, and stays off the public internet until Cloudflare Access with Google Workspace protects `console.mesquaredagency.com`.
